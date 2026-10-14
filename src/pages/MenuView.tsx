@@ -132,16 +132,17 @@ export const MenuView: React.FC = () => {
         </button>
       </div>
 
-      {/* Vet / Fresh Guarantee Chips Banner */}
-      <div className="flex items-center gap-1.5 overflow-x-auto py-1 -mx-4 px-4 scrollbar-none">
-        {HEADER_CHIPS.map((chip, idx) => (
-          <span
-            key={idx}
-            className="px-2.5 py-1 rounded-full bg-white dark:bg-[#292421] border border-[#e9ded2] dark:border-[#443a35] text-[10px] font-bold text-[#6f5c54] dark:text-[#c1b2a9] whitespace-nowrap shadow-2xs"
-          >
-            {chip}
-          </span>
-        ))}
+      {/* Vet / Fresh Guarantee Flowing Animated Marquee Strip */}
+      <div className="overflow-hidden -mx-4 py-2 bg-[#f3eadc] dark:bg-[#2c2724] border-y border-[#e9ded2] dark:border-[#443a35]">
+        <div className="animate-marquee whitespace-nowrap flex items-center gap-6 text-[10px] font-extrabold uppercase tracking-wider text-[#3b2923] dark:text-[#f5ebe3]">
+          {/* Repeating array twice for seamless continuous loop */}
+          {[...HEADER_CHIPS, ...HEADER_CHIPS].map((chip, idx) => (
+            <span key={idx} className="flex items-center gap-2">
+              <span className="text-[#f28a4b]">✦</span>
+              <span>{chip}</span>
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* Active Pet Saved Bowls (One-tap Reorder) */}

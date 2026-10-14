@@ -238,6 +238,7 @@ export class DemoApiClient implements ApiClient {
         is_chicken: it.menu_item.chicken || it.selected_addons.some((a) => a.chicken),
         cake_name: it.cake_name,
         addons_snapshot: it.selected_addons,
+        removed_ingredients: it.removed_ingredients,
         custom_notes: it.custom_notes,
         allergy_acknowledged: !!it.allergy_acknowledged,
       })),

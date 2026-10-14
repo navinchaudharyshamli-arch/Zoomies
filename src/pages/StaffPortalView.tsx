@@ -541,6 +541,12 @@ export const StaffPortalView: React.FC = () => {
                                         </p>
                                       )}
 
+                                      {it.removed_ingredients && it.removed_ingredients.length > 0 && (
+                                        <p className="text-[10px] bg-[#fff0ee] dark:bg-[#412725] text-[#d43f39] px-2 py-0.5 rounded font-extrabold mt-0.5">
+                                          ⚠️ EXCLUDE INGREDIENTS: {it.removed_ingredients.join(', ')}
+                                        </p>
+                                      )}
+
                                       {it.addons_snapshot && it.addons_snapshot.length > 0 && (
                                         <p className="text-[10px] text-[#6f5c54] dark:text-[#c1b2a9]">
                                           + {it.addons_snapshot.map((a: any) => `${a.name} (${a.grams}g)`).join(', ')}

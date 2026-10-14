@@ -12,6 +12,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     emoji: '🍲',
     chicken: true,
     is_available: true,
+    default_ingredients: ['Human-grade Chicken', 'Boiled Rice', 'Carrots', 'Pumpkin', 'Green Peas'],
   },
   {
     id: 'dog-main-2',
@@ -23,6 +24,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     emoji: '🥕',
     chicken: false,
     is_available: true,
+    default_ingredients: ['Boiled Pumpkin', 'Carrots', 'Rice', 'Curd'],
   },
   {
     id: 'dog-main-3',
@@ -34,6 +36,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     emoji: '🍳',
     chicken: false,
     is_available: true,
+    default_ingredients: ['Scrambled Egg', 'Sweet Potato', 'Pumpkin Mash'],
   },
   {
     id: 'dog-main-4',
@@ -45,6 +48,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     emoji: '🐟',
     chicken: false,
     is_available: true,
+    default_ingredients: ['Steamed Fish', 'Sweet Potato', 'Zucchini', 'Fish Broth'],
   },
 
   // DOG SNACKS
@@ -58,6 +62,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     emoji: '🍞',
     chicken: false,
     is_available: true,
+    default_ingredients: ['Whole Wheat Toast', 'Xylitol-free Peanut Butter', 'Chia Seeds'],
   },
   {
     id: 'dog-snack-2',
@@ -69,6 +74,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     emoji: '🦴',
     chicken: true,
     is_available: true,
+    default_ingredients: ['Human-grade Chicken Breast', 'Egg Glaze'],
   },
   {
     id: 'dog-snack-3',
@@ -80,6 +86,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     emoji: '🥕',
     chicken: false,
     is_available: true,
+    default_ingredients: ['Fresh Organic Carrots', 'Coconut Oil Drizzle'],
   },
 
   // CAT MAINS
@@ -93,6 +100,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     emoji: '🍲',
     chicken: true,
     is_available: true,
+    default_ingredients: ['Steamed Human-grade Chicken', 'Chicken Broth', 'Pumpkin Purée'],
   },
   {
     id: 'cat-main-2',
@@ -104,6 +112,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     emoji: '🐟',
     chicken: false,
     is_available: true,
+    default_ingredients: ['Steamed Fish', 'Pumpkin Mash', 'Fish Broth'],
   },
   {
     id: 'cat-main-3',
@@ -115,6 +124,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     emoji: '🥚',
     chicken: true,
     is_available: true,
+    default_ingredients: ['Human-grade Chicken', 'Scrambled Egg', 'Bone Broth'],
   },
 
   // CAT SNACKS & DRINKS
@@ -215,9 +225,11 @@ export const DEFAULT_SETTINGS: AppSettings = {
 
 export const CAFE_INFO = {
   name: 'Zoomies Pet Food Cafe',
-  address: 'Shop 4, Ground Floor, Greenwood Avenue, Indiranagar, Bengaluru, 560038',
-  phone: '+91 98765 43210',
-  maps_url: 'https://maps.google.com/?q=Zoomies+Pet+Cafe+Indiranagar+Bengaluru',
-  lat: 12.9783,
-  lng: 77.6408,
+  address: '5th floor, Eva Vets, Canal Road, Faridabad, Kishanpur, Dehradun, Uttarakhand 248013',
+  phone: '+91 78953 72634',
+  phone_raw: '+917895372634',
+  whatsapp: '917895372634',
+  maps_url: 'https://maps.google.com/?q=Eva+Vets+Canal+Road+Kishanpur+Dehradun+Uttarakhand+248013',
+  lat: 30.3668,
+  lng: 78.0772,
 };

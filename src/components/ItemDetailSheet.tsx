@@ -23,9 +23,16 @@ export const ItemDetailSheet: React.FC<ItemDetailSheetProps> = ({
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedAddons, setSelectedAddons] = useState<Record<string, number>>({});
+  const [removedIngredients, setRemovedIngredients] = useState<string[]>([]);
   const [customNotes, setCustomNotes] = useState('');
   const [showAllergyWarning, setShowAllergyWarning] = useState(false);
   const [pendingCartItem, setPendingCartItem] = useState<CartItem | null>(null);
+
+  const toggleRemoveIngredient = (ing: string) => {
+    setRemovedIngredients((prev) =>
+      prev.includes(ing) ? prev.filter((i) => i !== ing) : [...prev, ing]
+    );
+  };
 
   // Filter available addons matching species or both
   const applicableAddons = addons.filter(
@@ -83,20 +90,21 @@ export const ItemDetailSheet: React.FC<ItemDetailSheetProps> = ({
       menu_item: item,
       quantity,
       selected_addons: finalAddons,
+      removed_ingredients: removedIngredients.length > 0 ? removedIngredients : undefined,
       custom_notes: customNotes.trim() || undefined,
       item_total: itemTotal,
       allergy_acknowledged: false,
     };
 
     // 2. Check for allergy conflicts
-    const hasChicken = item.chicken || finalAddons.some((a) => a.chicken);
+    const chickenActive = (item.chicken && !removedIngredients.some(i => i.toLowerCase().includes('chicken'))) || finalAddons.some((a) => a.chicken);
     const petAllergicToChicken = petRestrictions.some((r) => r.toLowerCase().includes('chicken'));
-    const petAllergicToFish = petRestrictions.some((r) => r.toLowerCase().includes('fish')) && item.name.toLowerCase().includes('fish');
-    const petAllergicToEgg = petRestrictions.some((r) => r.toLowerCase().includes('egg')) && (item.name.toLowerCase().includes('egg') || finalAddons.some((a) => a.name.toLowerCase().includes('egg')));
-    const petAllergicToDairy = petRestrictions.some((r) => r.toLowerCase().includes('dairy')) && (item.name.toLowerCase().includes('curd') || item.name.toLowerCase().includes('milk') || finalAddons.some((a) => a.name.toLowerCase().includes('curd')));
-    const petAllergicToPeanut = petRestrictions.some((r) => r.toLowerCase().includes('peanut')) && item.name.toLowerCase().includes('peanut');
+    const petAllergicToFish = petRestrictions.some((r) => r.toLowerCase().includes('fish')) && item.name.toLowerCase().includes('fish') && !removedIngredients.some(i => i.toLowerCase().includes('fish'));
+    const petAllergicToEgg = petRestrictions.some((r) => r.toLowerCase().includes('egg')) && (item.name.toLowerCase().includes('egg') || finalAddons.some((a) => a.name.toLowerCase().includes('egg'))) && !removedIngredients.some(i => i.toLowerCase().includes('egg'));
+    const petAllergicToDairy = petRestrictions.some((r) => r.toLowerCase().includes('dairy')) && (item.name.toLowerCase().includes('curd') || item.name.toLowerCase().includes('milk') || finalAddons.some((a) => a.name.toLowerCase().includes('curd'))) && !removedIngredients.some(i => i.toLowerCase().includes('curd') || i.toLowerCase().includes('milk'));
+    const petAllergicToPeanut = petRestrictions.some((r) => r.toLowerCase().includes('peanut')) && item.name.toLowerCase().includes('peanut') && !removedIngredients.some(i => i.toLowerCase().includes('peanut'));
 
-    if ((hasChicken && petAllergicToChicken) || petAllergicToFish || petAllergicToEgg || petAllergicToDairy || petAllergicToPeanut) {
+    if ((chickenActive && petAllergicToChicken) || petAllergicToFish || petAllergicToEgg || petAllergicToDairy || petAllergicToPeanut) {
       setPendingCartItem(cartItem);
       setShowAllergyWarning(true);
       return;
@@ -149,8 +157,48 @@ export const ItemDetailSheet: React.FC<ItemDetailSheetProps> = ({
           </p>
         )}
 
-        {/* Scrollable Add-ons Section */}
+        {/* Scrollable Add-ons & Ingredient Customization Section */}
         <div className="flex-1 overflow-y-auto space-y-4 pr-1 mb-4">
+          {/* Option to remove ingredients from preset meals */}
+          {item.default_ingredients && item.default_ingredients.length > 0 && (
+            <div className="p-3 rounded-2xl bg-[#fff0e5]/70 dark:bg-[#3d2c24]/50 border border-[#f28a4b]/30 space-y-2">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#3b2923] dark:text-[#f5ebe3] flex items-center gap-1.5">
+                  <span>🥣</span>
+                  <span>Customize Recipe Ingredients</span>
+                </h3>
+                <span className="text-[10px] text-[#f28a4b] font-bold">Tap to remove</span>
+              </div>
+              <p className="text-[10px] text-[#6f5c54] dark:text-[#c1b2a9]">
+                Want to exclude any ingredient for {petName}? Tap to remove it:
+              </p>
+
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {item.default_ingredients.map((ing) => {
+                  const isRemoved = removedIngredients.includes(ing);
+                  return (
+                    <button
+                      key={ing}
+                      type="button"
+                      onClick={() => toggleRemoveIngredient(ing)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 border ${
+                        isRemoved
+                          ? 'bg-[#fff0ee] dark:bg-[#412725] text-[#d43f39] border-[#d43f39]/30 line-through opacity-75'
+                          : 'bg-white dark:bg-[#292421] text-[#34775d] border-[#34775d]/30 shadow-2xs'
+                      }`}
+                    >
+                      <span>{isRemoved ? '✕ No' : '✓'} {ing}</span>
+                    </button>
+                  );
+                })}
+              </div>
+              {removedIngredients.length > 0 && (
+                <p className="text-[10px] font-bold text-[#d43f39] pt-0.5">
+                  Kitchen will exclude: {removedIngredients.join(', ')}
+                </p>
+              )}
+            </div>
+          )}
           {applicableAddons.length > 0 && (
             <div>
               <div className="flex items-center justify-between mb-2">

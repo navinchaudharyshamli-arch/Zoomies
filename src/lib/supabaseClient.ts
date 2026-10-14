@@ -236,7 +236,14 @@ export class SupabaseApiClient implements ApiClient {
         is_chicken: it.menu_item.chicken || it.selected_addons.some((a) => a.chicken),
         cake_name: it.cake_name || null,
         addons_snapshot: it.selected_addons,
-        custom_notes: it.custom_notes || null,
+        custom_notes: [
+          it.custom_notes,
+          it.removed_ingredients && it.removed_ingredients.length > 0
+            ? `Excluded ingredients: ${it.removed_ingredients.join(', ')}`
+            : null,
+        ]
+          .filter(Boolean)
+          .join(' | ') || null,
         allergy_acknowledged: !!it.allergy_acknowledged,
       }));
 

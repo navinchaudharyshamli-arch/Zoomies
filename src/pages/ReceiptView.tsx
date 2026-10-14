@@ -201,6 +201,11 @@ export const ReceiptView: React.FC = () => {
                           Cake Name: "{it.cake_name}"
                         </p>
                       )}
+                      {it.removed_ingredients && it.removed_ingredients.length > 0 && (
+                        <p className="text-[9px] text-[#d43f39] font-semibold">
+                          ✕ Excluded: {it.removed_ingredients.join(', ')}
+                        </p>
+                      )}
                       {it.addons_snapshot && it.addons_snapshot.length > 0 && (
                         <p className="text-[9px] text-[#9b8b84]">
                           + {it.addons_snapshot.map((a: any) => `${a.name} (${a.grams}g)`).join(', ')}

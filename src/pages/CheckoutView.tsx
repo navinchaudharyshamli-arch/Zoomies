@@ -14,13 +14,16 @@ import {
   ArrowLeft,
   Check,
   ShieldCheck,
+  HelpCircle,
 } from 'lucide-react';
+import { ContactModal } from '../components/ContactModal';
 
 export const CheckoutView: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { groups, subtotal, clearCart } = useCart();
 
+  const [showContact, setShowContact] = useState(false);
   const [orderType, setOrderType] = useState<'delivery' | 'takeaway'>('delivery');
   const [selectedSlot, setSelectedSlot] = useState<string>('ASAP (about 30 min)');
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'upi'>('upi');
@@ -424,6 +427,25 @@ export const CheckoutView: React.FC = () => {
           </div>
         </div>
 
+        {/* Contact Team in Order Place Screen */}
+        <div className="p-3.5 rounded-2xl bg-white dark:bg-[#292421] border border-[#e9ded2] dark:border-[#443a35] flex items-center justify-between">
+          <div>
+            <b className="text-xs text-[#3b2923] dark:text-[#f5ebe3] block font-bold">
+              Need special delivery notes or assistance?
+            </b>
+            <span className="text-[10px] text-[#9b8b84]">
+              Talk with Zoomies kitchen team directly
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setShowContact(true)}
+            className="px-3 py-1.5 rounded-xl bg-[#fff0e5] dark:bg-[#3d2c24] text-[#f28a4b] text-xs font-bold hover:bg-[#f28a4b] hover:text-white transition-colors"
+          >
+            Contact Team
+          </button>
+        </div>
+
         {/* Place Order CTA */}
         <button
           type="submit"
@@ -434,6 +456,13 @@ export const CheckoutView: React.FC = () => {
           <span>₹{grandTotal}</span>
         </button>
       </form>
+
+      <ContactModal
+        isOpen={showContact}
+        onClose={() => setShowContact(false)}
+        title="Contact Zoomies Cafe"
+        subtitle="Special drop instructions, delivery coordination or questions"
+      />
     </div>
   );
 };

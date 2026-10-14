@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { ALLERGY_OPTIONS } from '../config/breeds';
 import { Plus, Trash2, ArrowRight, ShieldAlert, HeartHandshake, X } from 'lucide-react';
+import { ContactModal } from '../components/ContactModal';
 
 export const CartView: React.FC = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export const CartView: React.FC = () => {
     subtotal,
   } = useCart();
 
+  const [showContact, setShowContact] = useState(false);
   const [showAddBowlModal, setShowAddBowlModal] = useState(false);
   const [guestName, setGuestName] = useState('');
   const [guestSpecies, setGuestSpecies] = useState<'dog' | 'cat'>('dog');
@@ -150,6 +152,12 @@ export const CartView: React.FC = () => {
                       </p>
                     )}
 
+                    {it.removed_ingredients && it.removed_ingredients.length > 0 && (
+                      <p className="text-[10px] text-[#d43f39] font-semibold">
+                        ✕ Excluded: {it.removed_ingredients.join(', ')}
+                      </p>
+                    )}
+
                     {it.selected_addons.length > 0 && (
                       <p className="text-[10px] text-[#9b8b84] truncate">
                         + {it.selected_addons.map((a) => `${a.name} (${a.grams}g)`).join(', ')}
@@ -214,6 +222,25 @@ export const CartView: React.FC = () => {
         <Plus size={18} className="text-[#f28a4b]" />
       </button>
 
+      {/* Contact Zoomies Team Row in Cart */}
+      <div className="p-3.5 rounded-2xl bg-white dark:bg-[#292421] border border-[#e9ded2] dark:border-[#443a35] flex items-center justify-between">
+        <div>
+          <b className="text-xs text-[#3b2923] dark:text-[#f5ebe3] block font-bold">
+            Questions about ingredients?
+          </b>
+          <span className="text-[10px] text-[#9b8b84]">
+            Call or WhatsApp our kitchen nutritionists directly
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={() => setShowContact(true)}
+          className="px-3 py-1.5 rounded-xl bg-[#fff0e5] dark:bg-[#3d2c24] text-[#f28a4b] text-xs font-bold hover:bg-[#f28a4b] hover:text-white transition-colors"
+        >
+          Contact Team
+        </button>
+      </div>
+
       {/* Price Summary Breakdown */}
       <div className="p-4 rounded-3xl bg-white dark:bg-[#292421] border border-[#e9ded2] dark:border-[#443a35] space-y-2 text-xs">
         <div className="flex justify-between text-[#6f5c54] dark:text-[#c1b2a9]">
@@ -246,6 +273,13 @@ export const CartView: React.FC = () => {
         <span>Proceed to Checkout</span>
         <span>₹{grandTotal}</span>
       </button>
+
+      <ContactModal
+        isOpen={showContact}
+        onClose={() => setShowContact(false)}
+        title="Contact Zoomies Kitchen"
+        subtitle="Special diets, allergy double-checks or bowl queries"
+      />
 
       {/* Multi-Pet Bottom Sheet */}
       {showAddBowlModal && (

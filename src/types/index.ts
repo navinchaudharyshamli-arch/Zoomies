@@ -46,6 +46,7 @@ export interface MenuItem {
   emoji: string;
   chicken: boolean;
   is_available: boolean;
+  default_ingredients?: string[];
 }
 
 export interface Addon {
@@ -71,6 +72,7 @@ export interface CartItem {
   quantity: number;
   cake_name?: string;
   selected_addons: SelectedAddon[];
+  removed_ingredients?: string[];
   custom_notes?: string;
   item_total: number;
   allergy_acknowledged?: boolean;
@@ -107,6 +109,7 @@ export interface OrderItemRecord {
   is_chicken: boolean;
   cake_name?: string;
   addons_snapshot: SelectedAddon[];
+  removed_ingredients?: string[];
   custom_notes?: string;
   allergy_acknowledged: boolean;
 }
