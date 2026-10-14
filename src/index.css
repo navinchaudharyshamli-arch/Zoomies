@@ -32,20 +32,26 @@
   }
 
   .dark {
-    --cream: #1f1b19;
-    --cream-deep: #2c2724;
-    --surface: #292421;
-    --surface-solid: #302a27;
-    --brown: #f5ebe3;
-    --brown-2: #c1b2a9;
-    --muted: #8f817a;
-    --line: #443a35;
-    --orange-soft: #3d2c24;
-    --blue: #24383e;
-    --blue-2: #365761;
-    --pink: #402e32;
-    --pink-2: #67464d;
-    --red-soft: #412725;
+    --cream: #121214;
+    --cream-deep: #1a1a1e;
+    --surface: #1e1e24;
+    --surface-solid: #26262e;
+    --brown: #f4f4f6;
+    --brown-2: #a1a1aa;
+    --muted: #71717a;
+    --line: #2e2e38;
+    --orange: #f28a4b;
+    --orange-dark: #ea580c;
+    --orange-soft: #2c2018;
+    --blue: #182830;
+    --blue-2: #244250;
+    --blue-dark: #7dd3fc;
+    --pink: #2e1d24;
+    --pink-2: #4a2835;
+    --pink-dark: #f472b6;
+    --red: #ef4444;
+    --red-soft: #381a1a;
+    --green: #10b981;
   }
 
   body {

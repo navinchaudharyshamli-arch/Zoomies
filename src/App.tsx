@@ -12,6 +12,8 @@ import { ReceiptView } from './pages/ReceiptView';
 import { OrdersView } from './pages/OrdersView';
 import { ProfileView } from './pages/ProfileView';
 import { StaffPortalView } from './pages/StaffPortalView';
+import { CustomPlateBuilderView } from './pages/CustomPlateBuilderView';
+import { DEFAULT_ADDONS } from './config/menuData';
 
 // Protected Route Guard
 const ProtectedRoute: React.FC<{
@@ -73,6 +75,7 @@ export const App: React.FC = () => {
         <Route index element={<MenuView />} />
         <Route path="onboarding" element={<OnboardingView />} />
         <Route path="cake" element={<CakeCustomizerView />} />
+        <Route path="custom-plate" element={<CustomPlateBuilderView addons={DEFAULT_ADDONS} />} />
         <Route path="cart" element={<CartView />} />
         <Route path="checkout" element={<CheckoutView />} />
         <Route path="receipt/:id" element={<ReceiptView />} />

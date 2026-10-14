@@ -223,35 +223,23 @@ export const MenuView: React.FC = () => {
 
           {/* Custom Meal Plate */}
           <div
-            onClick={() => {
-              const plateItem = specials.find((s) => s.name === 'Custom Pet Meal Plate') || {
-                id: 'special-2',
-                species: 'both',
-                category: 'specials',
-                name: 'Custom Pet Meal Plate',
-                price: 299,
-                emoji: '🍱',
-                chicken: false,
-                is_available: true,
-              };
-              setSelectedItemForSheet(plateItem);
-            }}
-            className="p-3.5 rounded-3xl bg-[#dcedf3] dark:bg-[#24383e] border border-[#a9d2e2] dark:border-[#365761] cursor-pointer hover:shadow-md transition-all flex flex-col justify-between h-36"
+            onClick={() => navigate('/custom-plate')}
+            className="p-3.5 rounded-3xl bg-[#dcedf3] dark:bg-[#182830] border border-[#a9d2e2] dark:border-[#244250] cursor-pointer hover:shadow-md transition-all flex flex-col justify-between h-36"
           >
             <div>
               <div className="w-8 h-8 rounded-full bg-white/70 dark:bg-white/10 flex items-center justify-center text-lg mb-1.5">
                 🍱
               </div>
-              <b className="text-xs text-[#3b2923] dark:text-[#f5ebe3] block font-extrabold leading-tight">
+              <b className="text-xs text-[#3b2923] dark:text-[#f4f4f6] block font-extrabold leading-tight">
                 Custom Meal Plate
               </b>
-              <span className="text-[9px] text-[#6f5c54] dark:text-[#c1b2a9]">
-                Build from fresh add-ons
+              <span className="text-[9px] text-[#6f5c54] dark:text-[#a1a1aa]">
+                Craft bowl from raw ingredients
               </span>
             </div>
             <div className="flex items-center justify-between pt-1">
-              <strong className="text-xs font-extrabold text-[#3b2923] dark:text-[#f5ebe3]">
-                ₹299
+              <strong className="text-xs font-extrabold text-[#3b2923] dark:text-[#f4f4f6]">
+                From ₹99
               </strong>
               <span className="w-6 h-6 rounded-full bg-[#3b2923] dark:bg-[#f28a4b] text-white flex items-center justify-center">
                 <ChevronRight size={14} />
